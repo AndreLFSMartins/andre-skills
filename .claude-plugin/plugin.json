@@ -1,6 +1,6 @@
 {
   "name": "andre-skills",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "André's fork of mattpocock/skills, reduced to implement, tdd and code-review for /council:implement-loop; implement is model-invocable.",
   "author": {
     "name": "Matt Pocock",
