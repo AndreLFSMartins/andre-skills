@@ -6,9 +6,11 @@ Skills are organized into bucket folders under `skills/`:
 - `in-progress/`: beta: public on purpose, feedback wanted, not shipped in the plugin
 - `deprecated/`: no longer used
 
-Every skill in `engineering/` or `productivity/` (the **promoted** buckets) must have a reference in the top-level `README.md` and an entry in `.claude-plugin/plugin.json`'s `skills` array (the Claude Code plugin ships exactly the promoted set). Skills in `misc/`, `in-progress/`, and `deprecated/` must not appear in either.
+Every skill in `engineering/` or `productivity/` (the **promoted** buckets) must have a reference in the top-level `README.md`. Skills in `misc/`, `in-progress/`, and `deprecated/` must not appear in it, nor in `.claude-plugin/plugin.json`.
 
-Install commands are copied verbatim from [.agents/install-block.md](./.agents/install-block.md). `.claude-plugin/marketplace.json` makes the repo its own single-plugin marketplace (a fallback the install block explains, not the documented route). Run `claude plugin validate . --strict` after touching either manifest. Why a Claude plugin but not (yet) a Codex one lives in [.agents/adr/0002-ship-as-a-claude-code-plugin.md](./.agents/adr/0002-ship-as-a-claude-code-plugin.md).
+This repo is a fork of `mattpocock/skills`, published as the `andre-skills` plugin. Its `.claude-plugin/plugin.json` `skills` array lists only `tdd`, `implement`, and `code-review`: the skills `/council:implement-loop` calls through the Skill tool. `implement` drops upstream's `disable-model-invocation: true` so that call works. Every other skill comes from the upstream `mattpocock-skills` plugin, so do not add it to this manifest. Bump `version` in `plugin.json` and `package.json` together; `node scripts/sync-plugin-version.mjs --check` verifies they match.
+
+Install commands are copied verbatim from [.agents/install-block.md](./.agents/install-block.md). `.claude-plugin/marketplace.json` makes the repo its own single-plugin marketplace (a fallback the install block explains, not the documented route). Run `claude plugin validate .` after touching either manifest. It must pass, and its one accepted warning is that the root `CLAUDE.md` is not loaded as plugin context: `--strict` fails on that warning alone, on upstream too, so do not use it. Why a Claude plugin but not (yet) a Codex one lives in [.agents/adr/0002-ship-as-a-claude-code-plugin.md](./.agents/adr/0002-ship-as-a-claude-code-plugin.md).
 
 Each skill entry in the top-level `README.md` must link the skill name to its `SKILL.md`.
 
